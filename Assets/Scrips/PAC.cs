@@ -10,9 +10,25 @@ public class PAC : MonoBehaviour
 
     [SerializeField] private float PlayerDistance;
 
-    // Update is called once per frame
+    private Transform player;
+
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>().transform;
+    }
     void Update()
     {
-        
+        Vector2 enemyToPlayerVector = player.position - transform.position;
+        DirectionToPlayer = enemyToPlayerVector.normalized;
+
+        if (enemyToPlayerVector.magnitude <= PlayerDistance)
+        {
+            AwareOfPlayer = true;
+        }
+        else
+        {
+            AwareOfPlayer = false;
+        }
     }
 }
